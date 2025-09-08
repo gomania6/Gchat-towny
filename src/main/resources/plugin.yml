@@ -1,0 +1,6 @@
+name: gChat-Towny
+version: '1.0'
+main: com.Gomania.gChat.addons.GChatTowny
+api-version: '1.21'
+depend: [gChat, Towny]
+softdepend: [PlaceholderAPI]
