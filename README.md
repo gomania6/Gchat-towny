@@ -2,8 +2,6 @@
 
 **gChat-Towny** is an addon for the [gChat](https://modrinth.com/plugin/gchat) plugin that integrates support for [Towny](https://www.spigotmc.org/resources/towny-advanced.72606/) and displays player town and nation tags directly in chat. The plugin is also compatible with [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) for flexible placeholder usage.
 
-
-
 ---
 
 ## Features
@@ -58,11 +56,11 @@ debug: false
 
 ## PlaceholderAPI Placeholders
 
-| Placeholder           | Description           |         |
-| --------------------- | --------------------- | ------- |
-| `%gchat_towny%`       | Full tag: \`\[Nation  | Town]\` |
-| `%gchat_townytown%`   | Town tag `[Town]`     |         |
-| `%gchat_townynation%` | Nation tag `[Nation]` |         |
+| Placeholder           | Description                    |
+| --------------------- | ------------------------------ |
+| `%gchat_towny%`       | Full tag: `[Nation / Town]`    |
+| `%gchat_townytown%`   | Town tag `[Town]`              |
+| `%gchat_townynation%` | Nation tag `[Nation]`          |
 
 ---
 
