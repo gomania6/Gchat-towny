@@ -28,7 +28,7 @@
 2. Place the file in your server's `plugins` folder.
 3. Make sure you have installed:
 
-   * [gChat](https://github.com/YourRepo/gChat)
+   * [gChat](https://modrinth.com/plugin/gchat)
    * [Towny](https://www.spigotmc.org/resources/towny-advanced.72606/)
    * (optional) [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)
 4. Start the server. The plugin will create a configuration file at `plugins/gChat/towny-gChat.yml`.
