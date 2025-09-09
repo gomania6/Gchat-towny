@@ -2,3 +2,7 @@ tag_formats:
   town: '&f[&a%s&f] '
   nation: '&f[&#FF5656%s&f] '
   both: '&f[&c%s&f | &a%s&f] '
+
+use_hex_colors: true
+prefer_tag: true   # если true → берётся тег города/нации, иначе всегда название
+debug: false

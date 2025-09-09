@@ -59,6 +59,7 @@ public class GChatTowny extends JavaPlugin {
                 config.set("tag_formats.nation", "&f[&#FF5656%s&f] ");
                 config.set("tag_formats.both", "&f[&c%s&f | &a%s&f] ");
                 config.set("use_hex_colors", true);
+                config.set("prefer_tag", true);
                 config.set("debug", false);
 
                 config.save(configFile);
@@ -81,6 +82,24 @@ public class GChatTowny extends JavaPlugin {
         }
     }
 
+    private String resolveTownName(Town town) {
+        if (town == null) return "";
+        boolean preferTag = config.getBoolean("prefer_tag", true);
+        if (preferTag && town.hasTag() && town.getTag() != null && !town.getTag().isEmpty()) {
+            return town.getTag();
+        }
+        return town.getName();
+    }
+
+    private String resolveNationName(Nation nation) {
+        if (nation == null) return "";
+        boolean preferTag = config.getBoolean("prefer_tag", true);
+        if (preferTag && nation.hasTag() && nation.getTag() != null && !nation.getTag().isEmpty()) {
+            return nation.getTag();
+        }
+        return nation.getName();
+    }
+
     public String getTownyTag(Player player) {
         if (player == null) return "";
 
@@ -91,13 +110,15 @@ public class GChatTowny extends JavaPlugin {
             Town town = res.getTown();
             Nation nation = town.hasNation() ? town.getNation() : null;
 
-            String format;
-            if (town != null && nation != null) {
-                format = config.getString("tag_formats.both", "&f[&c%s&f | &a%s&f] ");
-                return applyColors(String.format(format, nation.getName(), town.getName()));
-            } else if (town != null) {
-                format = config.getString("tag_formats.town", "&f[&a%s&f] ");
-                return applyColors(String.format(format, town.getName()));
+            String townName = resolveTownName(town);
+
+            if (nation != null) {
+                String nationName = resolveNationName(nation);
+                String format = config.getString("tag_formats.both", "&f[&c%s&f | &a%s&f] ");
+                return applyColors(String.format(format, nationName, townName));
+            } else {
+                String format = config.getString("tag_formats.town", "&f[&a%s&f] ");
+                return applyColors(String.format(format, townName));
             }
 
         } catch (Exception e) {
@@ -113,7 +134,8 @@ public class GChatTowny extends JavaPlugin {
             Resident res = towny.getResident(player.getUniqueId());
             if (res != null && res.hasTown()) {
                 Town town = res.getTown();
-                return applyColors(String.format(config.getString("tag_formats.town", "&f[&a%s&f] "), town.getName()));
+                String townName = resolveTownName(town);
+                return applyColors(String.format(config.getString("tag_formats.town", "&f[&a%s&f] "), townName));
             }
         } catch (Exception ignored) {}
         return "";
@@ -127,7 +149,8 @@ public class GChatTowny extends JavaPlugin {
                 Town town = res.getTown();
                 if (town.hasNation()) {
                     Nation nation = town.getNation();
-                    return applyColors(String.format(config.getString("tag_formats.nation", "&f[&#FF5656%s&f] "), nation.getName()));
+                    String nationName = resolveNationName(nation);
+                    return applyColors(String.format(config.getString("tag_formats.nation", "&f[&#FF5656%s&f] "), nationName));
                 }
             }
         } catch (Exception ignored) {}
